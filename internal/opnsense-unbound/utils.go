@@ -1,6 +1,33 @@
 package opnsense
 
-import "strings"
+import (
+	"strings"
+
+	"sigs.k8s.io/external-dns/endpoint"
+)
+
+const ProviderSpecificAddPtrKey = "opnsense/addptr"
+
+// Sets AddPtr on record for A/AAAA only when opnsense/addptr is exactly "0" or "1".
+// Otherwise left blank.
+func ApplyAddPtrToRecord(record *DNSRecord, ep *endpoint.Endpoint) {
+	if ep.RecordType != "A" && ep.RecordType != "AAAA" {
+		return
+	}
+	v, ok := ep.GetProviderSpecificProperty(ProviderSpecificAddPtrKey)
+	if !ok {
+		return
+	}
+	s := strings.TrimSpace(v)
+	switch s {
+	case "0":
+		record.AddPtr = "0"
+	case "1":
+		record.AddPtr = "1"
+	default:
+		return
+	}
+}
 
 // UnboundFQDNSplitter splits a DNSName into two parts,
 // [0] Being the top level hostname

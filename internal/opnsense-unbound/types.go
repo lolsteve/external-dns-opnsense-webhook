@@ -20,6 +20,7 @@ type DNSRecord struct {
 	Mx          string `json:"mx,omitempty"`
 	MxPrio      string `json:"mxprio,omitempty"`
 	TxtData     string `json:"txtdata,omitempty"`
+	AddPtr      string `json:"addptr,omitempty"`
 }
 
 // unboundRecordsList is the main item returned from the Opnsense Unbound API

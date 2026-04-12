@@ -59,6 +59,9 @@ func (p *Provider) Records(ctx context.Context) ([]*endpoint.Endpoint, error) {
 			RecordType: recordType,
 			Targets:    targets,
 		}
+		if (recordType == "A" || recordType == "AAAA") && record.AddPtr == "0" {
+			ep.SetProviderSpecificProperty(ProviderSpecificAddPtrKey, "0")
+		}
 
 		if !p.domainFilter.Match(ep.DNSName) {
 			continue
