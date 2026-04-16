@@ -2,10 +2,12 @@
 
 <div align="center">
 
-[![GitHub Release](https://img.shields.io/github/v/release/crutonjohn/external-dns-opnsense-webhook?style=for-the-badge)](https://github.com/opnsense/external-dns-opnsense-webhook/releases)&nbsp;&nbsp;
+[![GitHub Release](https://img.shields.io/github/v/release/lolsteve/external-dns-opnsense-webhook?style=for-the-badge)](https://github.com/lolsteve/external-dns-opnsense-webhook/releases)&nbsp;&nbsp;
 [![Discord](https://img.shields.io/discord/673534664354430999?style=for-the-badge&label&logo=discord&logoColor=white&color=blue)](https://discord.gg/home-operations)
 
 </div>
+
+This repository is a fork of [crutonjohn/external-dns-opnsense-webhook](https://github.com/crutonjohn/external-dns-opnsense-webhook). It is maintained separate.
 
 This webhook graciously ~~stolen~~ inspired by [Kashall's Unifi Webhook](https://github.com/kashalls/external-dns-unifi-webhook).
 
@@ -39,13 +41,14 @@ You will need to:
 - Create a new Host Override with a different domain such as `host1.fake.com` pointing to `192.168.10.2`
 - Create an Alias under `host1.fake.com` that uses the original domain like `host1.example.com`
 
-This effecively protects your record from ownership conflicts while still allowing you to define custom records for a domain used by this webhook. Another option would be to create `dnsendpoint` CRDs for all the records you need in Unbound and let the webhook manage everything.
+This effectively protects your record from ownership conflicts while still allowing you to define custom records for a domain used by this webhook. Another option would be to create `dnsendpoint` CRDs for all the records you need in Unbound and let the webhook manage everything.
 
 ## 🎯 Requirements
 
-- ExternalDNS >= v0.14.0
+- ExternalDNS >= v0.21.0
 - OPNsense >= 23.7.12_5
 - Unbound >= 1.19.0
+- Go >= 1.26 (for local builds; see `go.mod` and the `Dockerfile`)
 
 ## ⛵ Deployment
 
@@ -86,7 +89,7 @@ This effecively protects your record from ownership conflicts while still allowi
       name: webhook
       webhook:
         image:
-          repository: ghcr.io/crutonjohn/external-dns-opnsense-webhook
+          repository: ghcr.io/lolsteve/external-dns-opnsense-webhook
           tag: main # replace with a versioned release tag
         env:
           - name: OPNSENSE_API_SECRET
@@ -128,7 +131,7 @@ This effecively protects your record from ownership conflicts while still allowi
 7. Install the Helm chart
 
     ```sh
-    helm install external-dns-opnsense external-dns/external-dns -f external-dns-opnsense-values yaml --version 1.14.3 -n external-dns
+    helm install external-dns-opnsense external-dns/external-dns -f external-dns-webhook-values.yaml --version 1.14.3 -n external-dns
     ```
 
 ---
@@ -150,6 +153,8 @@ OPNSENSE_HOST=https://192.168.0.1 OPNSENSE_API_SECRET=<secret value> OPNSENSE_AP
 ---
 
 ## 🤝 Gratitude and Thanks
+
+Thanks to [crutonjohn](https://github.com/crutonjohn) and everyone who contributed to [crutonjohn/external-dns-opnsense-webhook](https://github.com/crutonjohn/external-dns-opnsense-webhook).
 
 Thanks to all the people who donate their time to the [Home Operations](https://discord.gg/home-operations) Discord community.
 
