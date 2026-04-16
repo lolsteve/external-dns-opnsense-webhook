@@ -168,7 +168,7 @@ func (c *httpClient) CreateHostOverride(ep *endpoint.Endpoint) (*DNSRecord, erro
 	} else {
 		record.Server = ep.Targets[0]
 	}
-	ApplyAddPtrToRecord(&record, endpoint)
+	ApplyAddPtrToRecord(&record, ep)
 
 	jsonBody, err := json.Marshal(unboundAddHostOverride{
 		Host: record,
