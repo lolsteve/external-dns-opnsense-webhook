@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"github.com/caarlos0/env/v11"
-	"github.com/crutonjohn/external-dns-opnsense-webhook/cmd/webhook/init/configuration"
-	"github.com/crutonjohn/external-dns-opnsense-webhook/internal/opnsense-unbound"
+	"github.com/lolsteve/external-dns-opnsense-webhook/cmd/webhook/init/configuration"
+	"github.com/lolsteve/external-dns-opnsense-webhook/internal/opnsense-unbound"
 	"sigs.k8s.io/external-dns/endpoint"
 	"sigs.k8s.io/external-dns/provider"
 
@@ -17,7 +17,7 @@ import (
 type OpnsenseProviderFactory func(baseProvider *provider.BaseProvider, opnsenseConfig *opnsense.Config) provider.Provider
 
 func Init(config configuration.Config) (provider.Provider, error) {
-	var domainFilter endpoint.DomainFilter
+	var domainFilter endpoint.DomainFilterInterface
 	createMsg := "creating opnsense provider with "
 
 	if config.RegexDomainFilter != "" {

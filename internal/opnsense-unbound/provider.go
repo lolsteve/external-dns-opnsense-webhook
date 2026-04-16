@@ -15,11 +15,11 @@ type Provider struct {
 	provider.BaseProvider
 
 	client       *httpClient
-	domainFilter endpoint.DomainFilter
+	domainFilter endpoint.DomainFilterInterface
 }
 
 // NewOpnsenseProvider initializes a new DNSProvider.
-func NewOpnsenseProvider(domainFilter endpoint.DomainFilter, config *Config) (provider.Provider, error) {
+func NewOpnsenseProvider(domainFilter endpoint.DomainFilterInterface, config *Config) (provider.Provider, error) {
 	c, err := newOpnsenseClient(config)
 
 	if err != nil {
@@ -117,6 +117,6 @@ func (p *Provider) AdjustEndpoints(eps []*endpoint.Endpoint) ([]*endpoint.Endpoi
 }
 
 // GetDomainFilter returns the domain filter for the provider.
-func (p *Provider) GetDomainFilter() endpoint.DomainFilter {
+func (p *Provider) GetDomainFilter() endpoint.DomainFilterInterface {
 	return p.domainFilter
 }
