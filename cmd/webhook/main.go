@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 
-	"github.com/crutonjohn/external-dns-opnsense-webhook/cmd/webhook/init/configuration"
-	"github.com/crutonjohn/external-dns-opnsense-webhook/cmd/webhook/init/dnsprovider"
-	"github.com/crutonjohn/external-dns-opnsense-webhook/cmd/webhook/init/logging"
-	"github.com/crutonjohn/external-dns-opnsense-webhook/cmd/webhook/init/server"
-	"github.com/crutonjohn/external-dns-opnsense-webhook/pkg/webhook"
+	"github.com/lolsteve/external-dns-opnsense-webhook/cmd/webhook/init/configuration"
+	"github.com/lolsteve/external-dns-opnsense-webhook/cmd/webhook/init/dnsprovider"
+	"github.com/lolsteve/external-dns-opnsense-webhook/cmd/webhook/init/logging"
+	"github.com/lolsteve/external-dns-opnsense-webhook/cmd/webhook/init/server"
+	"github.com/lolsteve/external-dns-opnsense-webhook/pkg/webhook"
 	log "github.com/sirupsen/logrus"
 )
 
